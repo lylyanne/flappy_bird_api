@@ -1,4 +1,6 @@
 class Api::ScoresController < ApplicationController
+  before_action :set_cors, :only => [:index, :create]
+
   def index
     @scores = Score.all
     render :json => @scores
@@ -17,5 +19,9 @@ class Api::ScoresController < ApplicationController
   private
   def score_params
     params.require(:score).permit(:name, :score)
+  end
+
+  def set_cors
+    headers['Access-Control-Allow-Origin'] = "*"
   end
 end
