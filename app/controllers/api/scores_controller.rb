@@ -1,8 +1,8 @@
 class Api::ScoresController < ApplicationController
-  before_filter :set_cors
+  before_filter :check_origin
 
   def index
-    @scores = Score.all
+    @scores = Score.all.order(score: :desc)
     render :json => @scores
   end
 
@@ -21,9 +21,9 @@ class Api::ScoresController < ApplicationController
     params.require(:score).permit(:name, :score)
   end
 
-  def set_cors
-    headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
-    headers['Access-Control-Request-Method'] = 'POST'
+  def check_origin
+    if request.headers['origin'] != 'http://lylyanne.github.io'
+      render json: { error: "Unrecognized origin." }
+    end
   end
 end
