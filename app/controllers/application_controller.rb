@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :cors_set_access_control_headers
 
   def cors_set_access_control_headers
-    headers['Access-Control-Allow-Origin'] = 'http://lylyanne.github.io'
+    headers['Access-Control-Allow-Origin'] = 'https://lylyanne.github.io'
     headers['Access-Control-Allow-Methods'] = 'POST, GET'
     headers['Access-Control-Request-Method'] = 'POST'
   end

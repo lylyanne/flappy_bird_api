@@ -22,7 +22,7 @@ class Api::ScoresController < ApplicationController
   end
 
   def check_origin
-    if request.headers['origin'] != 'http://lylyanne.github.io'
+    if request.headers['origin'] != 'https://lylyanne.github.io'
       render json: { error: "Unrecognized origin." }
     end
   end
