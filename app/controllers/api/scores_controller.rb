@@ -23,7 +23,7 @@ class Api::ScoresController < ApplicationController
 
   def set_cors
     headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = 'POST, GET'
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
     headers['Access-Control-Request-Method'] = 'POST'
   end
 end
