@@ -1,5 +1,5 @@
 class Api::ScoresController < ApplicationController
-  before_action :set_cors, :only => [:index, :create]
+  before_filter :set_cors
 
   def index
     @scores = Score.all
@@ -10,7 +10,7 @@ class Api::ScoresController < ApplicationController
     @score = Score.new(score_params)
     @score.name = @score.name || "stranger"
     if @score.save
-      render :json => @score
+      render 'index'
     else
       render :json => @score.errors, :status => :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class Api::ScoresController < ApplicationController
   end
 
   def set_cors
-    headers['Access-Control-Allow-Origin'] = "*"
+    headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'POST, GET'
     headers['Access-Control-Request-Method'] = 'POST'
   end
