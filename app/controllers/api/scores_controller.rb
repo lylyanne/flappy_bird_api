@@ -1,14 +1,15 @@
 class Api::ScoresController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_filter :check_origin
 
   def index
-    @scores = Score.all.order(score: :desc)
+    @scores = Score.order(score: :desc, created_at: :desc).all
     render :json => @scores
   end
 
   def create
     @score = Score.new(score_params)
-    @score.name = @score.name || "stranger"
+    @score.name = @score.name || "visitor"
     if @score.save
       render 'index'
     else
