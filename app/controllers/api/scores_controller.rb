@@ -11,7 +11,7 @@ class Api::ScoresController < ApplicationController
     @score = Score.new(score_params)
     @score.name = @score.name || "visitor"
     if @score.save
-      render 'index'
+      render :json => @score, :status => :created
     else
       render :json => @score.errors, :status => :unprocessable_entity
     end
@@ -19,7 +19,7 @@ class Api::ScoresController < ApplicationController
 
   private
   def score_params
-    params.require(:score).permit(:name, :score)
+    params.require(:scores).permit(:name, :score)
   end
 
   def check_origin
